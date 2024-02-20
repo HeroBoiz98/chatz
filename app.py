@@ -5,7 +5,7 @@ import uuid
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-socketio = SocketIO(app)
+socketio = SocketIO(app, secure=True)
 
 # Directory to store HTML files for rooms
 ROOMS_DIR = 'rooms'
@@ -133,7 +133,7 @@ def join_room_route(room_code):
                     var user_name = document.getElementById('user-name').innerText.trim();
                     var room_code = "{room_code}";
 
-                    var socket = io.connect('http://' + document.domain + ':' + location.port);
+                    var socket = io.connect('https://' + document.domain + ':' + location.port);
 
                     socket.on('connect', function() {{
                         socket.emit('join', {{room: room_code}});
